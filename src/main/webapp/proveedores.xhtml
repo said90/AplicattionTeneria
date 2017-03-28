@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./plantilla/template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <p:outputLabel value="Proveedor"/>
+                    <p:inputText value="#{proveedorController.proveedor.proveedor}"/>
+                    
+                    <p:outputLabel value="Nombre de Propietario"/>
+                    <p:inputText value="#{proveedorController.proveedor.nombrePropietario}"/>
+                    
+                    <p:outputLabel value="NIT de Proveedor"/>
+                    <p:inputText value="#{proveedorController.proveedor.nit}"/>
+                    
+                    <p:outputLabel value="DUI de Proveedor"/>
+                    <p:inputText value="#{proveedorController.proveedor.dui}"/>
+                    
+                    
+                    <p:commandButton value="Guardar" actionListener="#{proveedorController.registrar()}"/>
+                </h:form>
+
+                <p:dataTable var="proveedor" value="#{proveedorController.proveedores}" reflow="true" rowsPerPageLabel="10" paginator="true">
+                    <f:facet name="header">
+                        Listado de proveedores
+                    </f:facet>
+
+                    <p:column headerText="Id Proveedor">
+                        <h:outputText value="#{proveedor.idProveedor}" />
+                    </p:column>
+
+                    <p:column headerText="Proveedor">
+                        <h:outputText value="#{proveedor.proveedor}" />
+                    </p:column>
+
+                    <p:column headerText="Nombre de Propietario">
+                        <h:outputText value="#{proveedor.nombrePropietario}" />
+                    </p:column>
+
+                    <p:column headerText="Nit Proveedor">
+                        <h:outputText value="#{proveedor.nit}" />
+                    </p:column>
+
+                    <p:column headerText="DUI Proveedor">
+                        <h:outputText value="#{proveedor.dui}" />
+                    </p:column>
+               
+                </p:dataTable>
+            </ui:define>
+
+
+        </ui:composition>
+
+
+    </body>
+</html>
