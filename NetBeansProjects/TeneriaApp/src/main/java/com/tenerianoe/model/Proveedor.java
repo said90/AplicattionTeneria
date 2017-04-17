@@ -20,29 +20,28 @@ import javax.persistence.Table;
  * @author said
  */
 @Entity
-@Table(name="proveedor")
-public class Proveedor implements Serializable{
+@Table(name = "proveedor")
+public class Proveedor implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private int idProveedor;
-    
-    @Column(name="proveedor")
+    @Column(name = "proveedor")
     private String proveedor;
-    @Column(name="propietario")
+    @Column(name = "propietario")
     private String propietario;
-    @Column(name="nit")
+    @Column(name = "nit")
     private String nit;
-    @Column(name="dui")
+    @Column(name = "dui")
     private String dui;
-    @Column(name="direccion")
+    @Column(name = "direccion")
     private String direccion;
-    @Column(name="telefono")
+    @Column(name = "telefono")
     private String telefono;
-    @ManyToOne
-    @JoinColumn(name = "idDepartamento",nullable = false)
-    private Departamento departamento;
+    
 
+    
+    
     public int getIdProveedor() {
         return idProveedor;
     }
@@ -99,14 +98,6 @@ public class Proveedor implements Serializable{
         this.telefono = telefono;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
-    }
-    
-    
+   
     
 }

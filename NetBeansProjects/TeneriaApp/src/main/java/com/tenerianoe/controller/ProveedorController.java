@@ -1,10 +1,6 @@
 package com.tenerianoe.controller;
 
-import com.tenerianoe.ejb.DepartamentoFacadeLocal;
-import com.tenerianoe.ejb.MunicipioFacadeLocal;
 import com.tenerianoe.ejb.ProveedorFacadeLocal;
-import com.tenerianoe.model.Departamento;
-import com.tenerianoe.model.Municipio;
 import com.tenerianoe.model.Proveedor;
 import java.io.Serializable;
 import java.util.List;
@@ -25,27 +21,16 @@ public class ProveedorController implements Serializable {
 
     @EJB
     private ProveedorFacadeLocal proveedorEJB;
-    @EJB
-    private DepartamentoFacadeLocal departamentoEJB;
-    @EJB
-    private MunicipioFacadeLocal municipioEJB;
 
-    private Municipio municipio;
     private Proveedor proveedor;
-    private Departamento departamento;
-
     private List<Proveedor> proveedores;
-    private List<Departamento> departamentos;
-    private List<Municipio> municipios;
 
     @PostConstruct
     public void init() {
+
         proveedor = new Proveedor();
-        departamento = new Departamento();
         proveedores = proveedorEJB.findAll();
-        departamentos = departamentoEJB.findAll();
-        municipios = municipioEJB.findAll();
-        this.listarDepartamentos();
+
     }
 
     /**
@@ -54,7 +39,6 @@ public class ProveedorController implements Serializable {
      */
     public void registrar() {
         try {
-            this.proveedor.setDepartamento(departamento);
             proveedorEJB.create(proveedor);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se registró"));
         } catch (Exception e) {
@@ -62,22 +46,15 @@ public class ProveedorController implements Serializable {
 
         }
     }
-
-    public void listarDepartamentos() {
+    
+     public void modificar() {
         try {
-            departamentos = departamentoEJB.findAll();
+            proveedorEJB.edit(proveedor);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Se registró"));
         } catch (Exception e) {
-            e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "Error!"));
+
         }
-    }
-
-    // Getters y Setters
-    public Municipio getMunicipio() {
-        return municipio;
-    }
-
-    public void setMunicipio(Municipio municipio) {
-        this.municipio = municipio;
     }
 
     public Proveedor getProveedor() {
@@ -88,14 +65,6 @@ public class ProveedorController implements Serializable {
         this.proveedor = proveedor;
     }
 
-    public Departamento getDepartamento() {
-        return departamento;
-    }
-
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
-    }
-
     public List<Proveedor> getProveedores() {
         return proveedores;
     }
@@ -104,19 +73,4 @@ public class ProveedorController implements Serializable {
         this.proveedores = proveedores;
     }
 
-    public List<Departamento> getDepartamentos() {
-        return departamentos;
-    }
-
-    public void setDepartamentos(List<Departamento> departamentos) {
-        this.departamentos = departamentos;
-    }
-
-    public List<Municipio> getMunicipios() {
-        return municipios;
-    }
-
-    public void setMunicipios(List<Municipio> municipios) {
-        this.municipios = municipios;
-    }
 }
